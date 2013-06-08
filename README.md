@@ -23,7 +23,7 @@ writing an R extension that calls C++ code and can be developed and debugged on 
 
 To use the C++ source files within a separate C++ project, copy the contents of
 entree/src. Compile with the preprocessor definition `RPROJECT` equal to 0 to remove the
-R-specific code, _i.e._, use `-DRPROJECT=0` in gcc or insert '`#define RPROJECT 0`' at the
+R-specific code, _i.e._, use `-DRPROJECT=0` in gcc or insert `#define RPROJECT 0` at the
 top of the file `shim.h`. Messages will be sent to stderr. Logical and runtime
 errors will be thrown with `std::logic_error` or `std::runtime_error`.
 
@@ -32,19 +32,19 @@ errors will be thrown with `std::logic_error` or `std::runtime_error`.
 To create a package usable within R, check and build the R package with the standard
 command-line tools:
 
-`cd path_to_entree_directory`
-`R CMD check entree`
-`R CMD build entree`
+`cd path_to_entree_directory
+R CMD check entree
+R CMD build entree`
 
 Then, install the package within R in the usual way:
 
-`setwd("path_to_entree_directory")`
-`install.packages("entree_0.10-1.tar.gz", repos = NULL, type = "source")`
-`library('entree')`
+`setwd("path_to_entree_directory")
+install.packages("entree_0.10-1.tar.gz", repos = NULL, type = "source")
+library('entree')`
 
 When the C++ files are compiled for use in R, the preprocessor parameter `RPROJECT` is
 automatically defined to 1. The code in `shim.h` then causes messages to be rerouted to
-the R function `Rprintf()` instead of to stderr. Errors are signalled via the R
+the R function `Rprintf()` instead of to stderr. Errors are signaled via the R
 function `error()` instead of by throwing exceptions. `R_CheckUserInterrupt()` is called
 periodically to allow interruption of lengthy calculations.
 
