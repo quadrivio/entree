@@ -32,15 +32,19 @@ errors will be thrown with `std::logic_error` or `std::runtime_error`.
 To create a package usable within R, check and build the R package with the standard
 command-line tools:
 
-`cd path_to_entree_directory
-R CMD check entree
-R CMD build entree`
+`cd path_to_entree_directory`
+
+`R CMD check entree`
+
+`R CMD build entree`
 
 Then, install the package within R in the usual way:
 
-`setwd("path_to_entree_directory")
-install.packages("entree_0.10-1.tar.gz", repos = NULL, type = "source")
-library('entree')`
+`setwd("path_to_entree_directory")`
+
+`install.packages("entree_0.10-1.tar.gz", repos = NULL, type = "source")`
+
+`library('entree')`
 
 When the C++ files are compiled for use in R, the preprocessor parameter `RPROJECT` is
 automatically defined to 1. The code in `shim.h` then causes messages to be rerouted to
