@@ -1,0 +1,11 @@
+Package: entree
+Type: Package
+Title: Ensemble of decision trees
+Version: 0.10-1
+Date: 2013-06-06
+Author: Michael Budiansky
+Copyright: Quadrivio Corporation
+Maintainer: <software@quadrivio.com>
+Description: An implementation of decision tree ensembles, using binary splits and a deterministic
+  (non-random) set of columns for each tree.
+License: BSD + file LICENSE

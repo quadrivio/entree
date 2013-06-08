@@ -1,0 +1,2 @@
+export(entree, predict.entree, print.entree)
+useDynLib(entree, entree_C, entree_predict_C)
