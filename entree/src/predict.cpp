@@ -390,7 +390,6 @@ void cover_predict(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 2;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 0;
         
@@ -399,10 +398,10 @@ void cover_predict(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
         
         vector< vector<Value> > predictValues = values;
         
@@ -417,7 +416,6 @@ void cover_predict(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 2;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 1;
         
@@ -426,10 +424,10 @@ void cover_predict(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
         
         vector< vector<Value> > predictValues = values;
         

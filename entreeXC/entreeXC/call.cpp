@@ -67,7 +67,6 @@ void callTrain(const std::string& attributesFile,
     index_t columnsPerTree = -1;
     int maxDepth = 500;
     int minDepth = 1;
-    bool doRandom = false;
     bool doPrune = false;
     double minImprovement = 0.0;
     index_t minLeafCount = 4;
@@ -232,10 +231,9 @@ void callTrain(const std::string& attributesFile,
 
     // train
 
-    train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-          minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-          availableColumns, selectColumns, values, valueTypes, categoryMaps, targetColumn, colNames,
-          imputeOptions);
+    train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+          maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+          selectColumns, values, valueTypes, categoryMaps, targetColumn, colNames, imputeOptions);
     
     // write model
     

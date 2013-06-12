@@ -53,7 +53,6 @@ SEXP entree_C(SEXP x,
               SEXP s_minDepth,
               SEXP s_maxTrees,
               SEXP s_columnsPerTree,
-              SEXP s_doRandom,
               SEXP s_doPrune,
               SEXP s_minImprovement,
               SEXP s_minLeafCount,
@@ -85,9 +84,6 @@ SEXP entree_C(SEXP x,
         
     } else if (!Rf_isInteger(s_columnsPerTree)) {
         error("entree_C: wrong columnsPerTree type");
-        
-    } else if (!Rf_isInteger(s_doRandom)) {
-        error("entree_C: wrong s_doRandom type");
         
     } else if (!Rf_isInteger(s_doPrune)) {
         error("entree_C: wrong doPrune type");
@@ -286,7 +282,6 @@ SEXP entree_C(SEXP x,
     int minDepth = *INTEGER(s_minDepth);
     index_t maxTrees = *INTEGER(s_maxTrees);
     index_t maxNodes = -1;
-    bool doRandom = *INTEGER(s_doRandom);
     bool doPrune = *INTEGER(s_doPrune);
     double minImprovement = *REAL(s_minImprovement);
     index_t minLeafCount = *INTEGER(s_minLeafCount);
@@ -299,10 +294,10 @@ SEXP entree_C(SEXP x,
     
     SelectIndexes selectColumns;
     
-    train(trees, columnsPerTree, maxDepth, minDepth,  doRandom, doPrune, minImprovement,
-          minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-          availableColumns, selectColumns, xValues, xValueTypes, xCategoryMaps, targetColumn,
-          colNames, imputeOptions);
+    train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+          maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+          selectColumns, xValues, xValueTypes, xCategoryMaps, targetColumn, colNames,
+          imputeOptions);
     
     if (trees.size() == 0) {
         CERR << "no trees found" << endl;

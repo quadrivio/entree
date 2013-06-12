@@ -48,7 +48,6 @@ extern "C" {
                   SEXP s_minDepth,
                   SEXP s_maxTrees,
                   SEXP s_columnsPerTree,
-                  SEXP s_doRandom,
                   SEXP s_doPrune,
                   SEXP s_minImprovement,
                   SEXP s_minLeafCount,

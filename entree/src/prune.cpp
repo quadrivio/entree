@@ -29,12 +29,6 @@ void updateBranchCategorical(TreeNode *nodeP);
 
 void updateBranchNumeric(TreeNode *nodeP);
 
-#if 0
-// recursively find all leaf nodes in the subtree beginning at the specified node; if the specified
-// node is itself a leaf, include it in the set unless it is the root node
-void findLeaves(set<TreeNode *>& leafIndexes, TreeNode *nodeP);
-#endif
-
 // recursively find all branch nodes and their respective depths
 void findBranchNodes(vector< pair<int, TreeNode *> >& nodes, int depth, TreeNode *nodeP);
 
@@ -199,24 +193,6 @@ void updateBranchNumeric(TreeNode *nodeP)
             greaterOrNotNode->branchSum2;
     }
 }
-
-#if 0
-// recursively find all leaf nodes in the subtree beginning at the specified node; if the specified
-// node is itself a leaf, include it in the set unless it is the root node
-void findLeaves(set<TreeNode *>& leafIndexes, TreeNode *nodeP)
-{
-    if (nodeP->lessOrEqualNode == NULL) {
-        // don't insert root
-        if (nodeP->parentNode != NULL) {
-            leafIndexes.insert(nodeP);
-        }
-        
-    } else {
-        findLeaves(leafIndexes, nodeP->lessOrEqualNode);
-        findLeaves(leafIndexes, nodeP->greaterOrNotNode);
-    }
-}
-#endif
 
 void findBranchNodes(vector< pair<int, TreeNode *> >& nodes, int depth, TreeNode *nodeP)
 {

@@ -31,14 +31,6 @@ void makeSelectColSubsets(size_t columnCount,
                           index_t maxSubsets,
                           std::vector< std::vector<size_t> >& subsets);
 
-// make numSubsets subsets of columns, with column numbers in the range (0 to columnCount - 1),
-// where each subset contains columnsPerSubset columns, randomly chosen
-void makeRandomSelectColSubsets(size_t columnCount,
-                                size_t columnsPerSubset,
-                                index_t numSubsets,
-                                std::vector< std::vector<size_t> >& subsets);
-
-
 // component tests
 void ctest_subsets(int& totalPassed, int& totalFailed, bool verbose);
 

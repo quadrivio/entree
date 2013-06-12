@@ -46,7 +46,6 @@ void evaluateTree(CompactTree& compactTree,
                   int maxDepth,
                   int maxNodes,
                   int& maxDepthUsed,
-                  bool doRandom,
                   bool doPrune,
                   double minImprovement,
                   index_t minLeafCount,
@@ -215,7 +214,6 @@ void train(std::vector<CompactTree>& trees,
            index_t columnsPerTree,
            int maxDepth,
            int minDepth,
-           bool doRandom,
            bool doPrune,
            double minImprovement,
            index_t minLeafCount,
@@ -398,13 +396,7 @@ void train(std::vector<CompactTree>& trees,
     
     vector< vector<size_t> > subsets;
     
-    if (doRandom) {
-        makeRandomSelectColSubsets((size_t)numSelectedCols, (size_t)columnsPerTree, maxTrees,
-                                   subsets);
-        
-    } else {
-        makeSelectColSubsets((size_t)numSelectedCols, (size_t)columnsPerTree, maxTrees, subsets);
-    }
+    makeSelectColSubsets((size_t)numSelectedCols, (size_t)columnsPerTree, maxTrees, subsets);
     
     if (gVerbose) CERR << localTimeString(t) << " done makeSelectColSubsets" << endl;
     
@@ -420,7 +412,7 @@ void train(std::vector<CompactTree>& trees,
         trees.push_back(compactTree);
         
         int maxDepthUsed;
-        evaluateTree(trees[treeIndex], maxDepth, (int)maxNodes, maxDepthUsed, doRandom, doPrune,
+        evaluateTree(trees[treeIndex], maxDepth, (int)maxNodes, maxDepthUsed, doPrune,
                      minImprovement, minLeafCount, maxSplitsPerNumericAttribute, values, valueTypes,
                      categoryMaps, subsets[subsetIndex], selectRows, selectColumns, targetColumn,
                      sortedIndexes, colNames, imputedValues);
@@ -2000,7 +1992,6 @@ void evaluateTree(CompactTree& compactTree,
                   int maxDepth,
                   int maxNodes,
                   int& maxDepthUsed,
-                  bool doRandom,
                   bool doPrune,
                   double minImprovement,
                   index_t minLeafCount,
@@ -2295,7 +2286,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 2;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 0;
         
@@ -2304,10 +2294,10 @@ void cover_train(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
     }
     
     {
@@ -2317,7 +2307,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 5;
         index_t columnsPerTree = -1;
         int minDepth = 2;
-        bool doRandom = true;
         bool doPrune = false;
         size_t targetColumn = 1;
         
@@ -2328,10 +2317,10 @@ void cover_train(bool verbose)
         
         maxSplitsPerNumericAttribute = 1;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
         
         if (verbose) {
             printCompactTrees(trees, valueTypes, targetColumn, selectColumns, colNames,
@@ -2346,7 +2335,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = -1;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 0;
         
@@ -2355,10 +2343,10 @@ void cover_train(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
     }
     
     values.push_back(values[4]);
@@ -2391,7 +2379,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 20;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 1;
         
@@ -2400,10 +2387,10 @@ void cover_train(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
     }
     
     {
@@ -2413,7 +2400,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 2;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 1;
         
@@ -2422,10 +2408,10 @@ void cover_train(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
     }
     
     imputeOptions[4] = kToMode;
@@ -2437,7 +2423,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 2;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 1;
         
@@ -2446,10 +2431,10 @@ void cover_train(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
     }
     
     values[1][2].number.i = categoryMaps[1].findOrInsertCategory("C");
@@ -2461,7 +2446,6 @@ void cover_train(bool verbose)
         index_t maxTrees = 100;
         index_t columnsPerTree = 2;
         int minDepth = 0;
-        bool doRandom = false;
         bool doPrune = true;
         size_t targetColumn = 1;
         
@@ -2470,10 +2454,10 @@ void cover_train(bool verbose)
         
         vector< vector<Value> > trainValues = values;
         
-        train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-              minLeafCount, maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows,
-              availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-              colNames, imputeOptions);
+        train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+              maxSplitsPerNumericAttribute,maxTrees, maxNodes, selectRows, availableColumns,
+              selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+              imputeOptions);
     }
         
     // ~~~~~~~~~~~~~~~~~~~~~~

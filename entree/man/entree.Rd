@@ -8,9 +8,9 @@ An implementation of decision tree ensembles, using binary splits and a determin
   (non-random) set of columns for each tree.
 }
 \usage{
-entree(x, y, maxDepth = 500, minDepth = 1, maxTrees = 1000, columnsPerTree = NA, doRandom = FALSE,
-  doPrune = FALSE, minImprovement = 0.0, minLeafCount = 4, maxSplitsPerNumericAttribute = -1,
-  xValueTypes = NA, yValueType = NA, xImputeOptions = NA)
+entree(x, y, maxDepth = 500, minDepth = 1, maxTrees = 1000, columnsPerTree = NA, doPrune = FALSE,
+  minImprovement = 0.0, minLeafCount = 4, maxSplitsPerNumericAttribute = -1, xValueTypes = NA,
+  yValueType = NA, xImputeOptions = NA)
 \method{print}{entree}(x, \dots)
 \method{predict}{entree}(object, x, \dots)
 }
@@ -22,7 +22,6 @@ entree(x, y, maxDepth = 500, minDepth = 1, maxTrees = 1000, columnsPerTree = NA,
   \item{minDepth}{minimum depth of tree to be used in ensemble}
   \item{maxTrees}{maximum number of trees in ensemble}
   \item{columnsPerTree}{number of columns per tree}
-  \item{doRandom}{use random subsets}
   \item{doPrune}{prune trees after building (experimental)}
   \item{minImprovement}{minimum fractional improvement for splitting numerical value}
   \item{minLeafCount}{minimum count of examples in a leaf}

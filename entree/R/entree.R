@@ -10,9 +10,9 @@
 #
 
 entree <-
-function(x, y, maxDepth = 500, minDepth = 1, maxTrees = 1000, columnsPerTree = NA, doRandom = FALSE,
-doPrune = FALSE, minImprovement = 0.0, minLeafCount = 4, maxSplitsPerNumericAttribute = -1,
-xValueTypes = NA, yValueType = NA, xImputeOptions = NA)
+function(x, y, maxDepth = 500, minDepth = 1, maxTrees = 1000, columnsPerTree = NA, doPrune = FALSE,
+minImprovement = 0.0, minLeafCount = 4, maxSplitsPerNumericAttribute = -1, xValueTypes = NA,
+yValueType = NA, xImputeOptions = NA)
 {
     # make sure types are correct before calling C function
     
@@ -38,9 +38,6 @@ xValueTypes = NA, yValueType = NA, xImputeOptions = NA)
         columnsPerTree = 0
     }
     storage.mode(columnsPerTree) <- "integer"
-
-    # doRandom
-    storage.mode(doRandom) <- "integer"
 
     # doPrune
     storage.mode(doPrune) <- "integer"
@@ -72,16 +69,14 @@ xValueTypes = NA, yValueType = NA, xImputeOptions = NA)
     }
     storage.mode(xImputeOptions) <- "character"
 
-	z = .Call(entree_C, x, y, maxDepth, minDepth, maxTrees, columnsPerTree, doRandom, doPrune,
-            minImprovement, minLeafCount, maxSplitsPerNumericAttribute, xValueTypes, yValueType,
-            xImputeOptions)
+	z = .Call(entree_C, x, y, maxDepth, minDepth, maxTrees, columnsPerTree, doPrune, minImprovement,
+    minLeafCount, maxSplitsPerNumericAttribute, xValueTypes, yValueType, xImputeOptions)
     
     # add other input parameters to object
     result = z
     result$maxDepth = maxDepth
     result$minDepth = minDepth
     result$maxTrees = maxTrees
-    result$doRandom = doRandom
     result$doPrune = doPrune
     result$minImprovement = minImprovement
     result$minLeafCount = minLeafCount

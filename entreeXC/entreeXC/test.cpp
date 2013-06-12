@@ -334,7 +334,6 @@ bool test_iris(bool verbose)
     index_t maxTrees = 1;
     index_t columnsPerTree = 4;
     int minDepth = 0;
-    bool doRandom = false;
     bool doPrune = true;
     size_t targetColumn = values.size() - 1;
     
@@ -346,10 +345,10 @@ bool test_iris(bool verbose)
     // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
     // train
     
-    train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-          minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-          availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-          colNames, imputeOptions);
+    train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+          maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+          selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+          imputeOptions);
     
     if (verbose) {
         printCompactTrees(trees, valueTypes, targetColumn, selectColumns, colNames,
@@ -421,7 +420,6 @@ bool test_crime(bool verbose)
     index_t maxTrees = 20;
     index_t columnsPerTree = -1;
     int minDepth = 2;
-    bool doRandom = false;
     bool doPrune = false;
     
     SelectIndexes availableColumns(numCols, true);
@@ -448,10 +446,10 @@ bool test_crime(bool verbose)
     // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
     // train
     
-    train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-          minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-          availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-          colNames, imputeOptions);
+    train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+          maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+          selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+          imputeOptions);
     
     if (verbose) {
         printCompactTrees(trees, valueTypes, targetColumn, selectColumns, colNames,
@@ -535,7 +533,6 @@ bool test_allCategorical(bool verbose)
     index_t maxTrees = 1;
     index_t columnsPerTree = 5;
     int minDepth = 0;
-    bool doRandom = false;
     bool doPrune = false;
     size_t targetColumn = 5;
     
@@ -547,10 +544,10 @@ bool test_allCategorical(bool verbose)
     // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
     // train
     
-    train(trees, columnsPerTree, maxDepth, minDepth, doRandom, doPrune, minImprovement,
-          minLeafCount, maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows,
-          availableColumns, selectColumns, trainValues, valueTypes, categoryMaps, targetColumn,
-          colNames, imputeOptions);
+    train(trees, columnsPerTree, maxDepth, minDepth, doPrune, minImprovement, minLeafCount,
+          maxSplitsPerNumericAttribute, maxTrees, maxNodes, selectRows, availableColumns,
+          selectColumns, trainValues, valueTypes, categoryMaps, targetColumn, colNames,
+          imputeOptions);
     
     if (verbose) {
         printCompactTrees(trees, valueTypes, targetColumn, selectColumns, colNames, categoryMaps);
