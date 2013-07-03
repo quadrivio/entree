@@ -370,7 +370,7 @@ void ctest_prune(int& totalPassed, int& totalFailed, bool verbose)
     // ~~~~~~~~~~~~~~~~~~~~~~
     
     if (verbose) {
-        CERR << "utils.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
+        CERR << "prune.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
     }
     
     totalPassed += passed;

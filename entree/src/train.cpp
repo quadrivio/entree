@@ -2150,6 +2150,9 @@ void evaluateTree(CompactTree& compactTree,
 // component tests
 void ctest_train(int& totalPassed, int& totalFailed, bool verbose)
 {
+    int passed = 0;
+    int failed = 0;
+    
     // ~~~~~~~~~~~~~~~~~~~~~~
     // train 
 
@@ -2216,6 +2219,14 @@ void ctest_train(int& totalPassed, int& totalFailed, bool verbose)
     // ~~~~~~~~~~~~~~~~~~~~~~
     // getBestCategoricalSplit
 
+    // ~~~~~~~~~~~~~~~~~~~~~~
+    
+    if (verbose) {
+        CERR << "train.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
+    }
+    
+    totalPassed += passed;
+    totalFailed += failed;
 }
 
 // code coverage

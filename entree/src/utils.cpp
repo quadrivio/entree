@@ -141,7 +141,25 @@ void fileToString(const std::string& path, std::string& str)
 {
     ifstream ifs(path.c_str());
     
-    ifs >> str;
+    const int BUFSIZE = 4096;
+    char buffer[BUFSIZE];
+    ssize_t nbytes = BUFSIZE;
+    
+    ostringstream oss;
+    
+    do {
+        ifs.read(buffer, BUFSIZE);
+        if (ifs.eof() || ifs.fail()) {
+            nbytes = ifs.gcount();                    
+        }
+        
+        if (nbytes > 0) {
+            oss.write(buffer, nbytes);
+        }
+        
+    } while (nbytes == BUFSIZE);
+    
+    str = oss.str();
     
     ifs.close();
 }
@@ -245,7 +263,7 @@ void ctest_utils(int& totalPassed, int& totalFailed, bool verbose)
     
     remove("foo.txt");
     
-    string outStr = "Hello";
+    string outStr = "Hello World\nFoo\tBar";
     stringToFile(outStr, "foo.txt");
     
     string inStr;

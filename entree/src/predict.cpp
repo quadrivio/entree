@@ -337,7 +337,7 @@ void ctest_predict(int& totalPassed, int& totalFailed, bool verbose)
     // ~~~~~~~~~~~~~~~~~~~~~~
     
     if (verbose) {
-        CERR << "utils.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
+        CERR << "predict.cpp" << "\t" << passed << " passed, " << failed << " failed" << endl;
     }
     
     totalPassed += passed;
