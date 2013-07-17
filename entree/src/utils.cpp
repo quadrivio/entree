@@ -13,7 +13,7 @@
 // Miscellaneous utility functions
 //
 
-#include <fstream>  // must preceed .h includes
+#include <fstream>  // must precede .h includes
 
 #include "utils.h"
 
@@ -141,23 +141,8 @@ void fileToString(const std::string& path, std::string& str)
 {
     ifstream ifs(path.c_str());
     
-    const int BUFSIZE = 4096;
-    char buffer[BUFSIZE];
-    ssize_t nbytes = BUFSIZE;
-    
     ostringstream oss;
-    
-    do {
-        ifs.read(buffer, BUFSIZE);
-        if (ifs.eof() || ifs.fail()) {
-            nbytes = ifs.gcount();                    
-        }
-        
-        if (nbytes > 0) {
-            oss.write(buffer, nbytes);
-        }
-        
-    } while (nbytes == BUFSIZE);
+    oss << ifs.rdbuf();
     
     str = oss.str();
     
