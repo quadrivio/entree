@@ -86,7 +86,7 @@ Max OS 10.9.5
 R 3.1.2  
 XCode 6.2  
 
-This project has not yet been tested or modified for Windows or Linux.
+This project has not yet been tested or modified for Windows. It has been very lightly tested on Linux (CentOS 6.6).
 
 ### License
 
