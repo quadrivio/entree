@@ -3,9 +3,9 @@
 //  entree
 //
 //  Created by MPB on 5/7/13.
-//  Copyright (c) 2013 Quadrivio Corporation. All rights reserved.
+//  Copyright (c) 2015 Quadrivio Corporation. All rights reserved.
 //  License http://opensource.org/licenses/BSD-2-Clause
-//          <YEAR> = 2013
+//          <YEAR> = 2015
 //          <OWNER> = Quadrivio Corporation
 //
 
@@ -26,7 +26,7 @@ using namespace std;
 
 // ========== Globals ==============================================================================
 
-const Value gNaValue = { 0.0, true };
+const Value gNaValue = { { 0.0 }, true };
 
 // ========== Classes ==============================================================================
 
@@ -1250,9 +1250,9 @@ void fillValues(vector< vector<Value> >& values, vector<ValueType>& valueTypes)
     values.clear();
     valueTypes.clear();
     
-    Value v1 = { 1.0, false }; 
-    Value v2 = { 2.0, false }; 
-    Value v3 = { 3.0, false };
+    Value v1 = { { 1.0 }, false };
+    Value v2 = { { 2.0 }, false };
+    Value v3 = { { 3.0 }, false };
     vector<Value> c1;
     c1.push_back(gNaValue);
     c1.push_back(v1);
@@ -1263,9 +1263,9 @@ void fillValues(vector< vector<Value> >& values, vector<ValueType>& valueTypes)
     values.push_back(c1);
     valueTypes.push_back(kNumeric);
     
-    Value v4 = { 0, false }; 
-    Value v5 = { 0, false }; 
-    Value v6 = { 0, false };
+    Value v4 = { { 0 }, false };
+    Value v5 = { { 0 }, false };
+    Value v6 = { { 0 }, false };
     v4.number.i = 0;
     v5.number.i = 1;
     v6.number.i = 2;

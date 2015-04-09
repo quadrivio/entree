@@ -3,7 +3,7 @@
 //  entree
 //
 //  Created by MPB on 5/27/13.
-//  Copyright (c) 2013 Quadrivio Corporation. All rights reserved.
+//  Copyright (c) 2015 Quadrivio Corporation. All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without modification, are permitted
 // provided that the following conditions are met:
@@ -43,7 +43,7 @@ void usage();
 
 void version()
 {
-    cerr << "0.10-1" << endl;
+    cerr << "0.10-2" << endl;
 }
 
 int main (int argc, const char * argv[])

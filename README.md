@@ -33,16 +33,16 @@ To create a package usable within R, check and build the R package with the stan
 command-line tools:
 
 ```
-cd path_to_entree_directory
+cd path_to_top_directory
 R CMD check entree
 R CMD build entree
 ```
 
-Then, install the package within R in the usual way:
+(If you download and expand the zip file, the top directory is named entree-master.) Then, install the package within R in the usual way:
 
 ```
-setwd("path_to_entree_directory")
-install.packages("entree_0.10-1.tar.gz", repos = NULL, type = "source")
+setwd("path_to_top_directory")
+install.packages("entree_0.10-2.tar.gz", repos = NULL, type = "source")
 library('entree')
 ```
 
@@ -79,9 +79,9 @@ argument, "--develop".
 
 ### Development Environment
 
-Max OS 10.6.8  
-R 2.15.1  
-XCode 4.2  
+Max OS 10.9.5  
+R 3.1.2  
+XCode 6.2  
 
 This project has not yet been tested or modified for Windows or Linux.
 

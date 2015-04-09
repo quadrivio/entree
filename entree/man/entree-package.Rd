@@ -10,8 +10,8 @@ An implementation of decision tree ensembles, using binary splits and a determin
 \tabular{ll}{
 Package: \tab entree\cr
 Type: \tab Package\cr
-Version: \tab 0.10-1\cr
-Date: \tab 2013-06-06\cr
+Version: \tab 0.10-2\cr
+Date: \tab 2015-04-09\cr
 License: \tab BSD + file LICENSE\cr
 }
 This package creates and uses an ensemble of decision trees for classification and regression. To

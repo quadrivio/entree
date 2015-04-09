@@ -3,9 +3,9 @@
 //  entree
 //
 //  Created by MPB on 5/29/13.
-//  Copyright (c) 2013 Quadrivio Corporation. All rights reserved.
+//  Copyright (c) 2015 Quadrivio Corporation. All rights reserved.
 //  License http://opensource.org/licenses/BSD-2-Clause
-//          <YEAR> = 2013
+//          <YEAR> = 2015
 //          <OWNER> = Quadrivio Corporation
 //
 
@@ -277,9 +277,7 @@ bool test_commandLine(bool verbose)
     if (verbose || !success) {
         CERR << "command line iris data compareMatch = " << fixed << setprecision(2) << result << endl;
     }
-    
-    return success;
-    
+
     // ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ 
     // delete test files
     
@@ -292,7 +290,7 @@ bool test_commandLine(bool verbose)
         remove(PREDICT_PATH);    
     }
     
-    return true;
+    return success;
 }
 
 // test classic iris data set

@@ -3,9 +3,9 @@
 //  entree
 //
 //  Created by MPB on 5/8/13.
-//  Copyright (c) 2013 Quadrivio Corporation. All rights reserved.
+//  Copyright (c) 2015 Quadrivio Corporation. All rights reserved.
 //  License http://opensource.org/licenses/BSD-2-Clause
-//          <YEAR> = 2013
+//          <YEAR> = 2015
 //          <OWNER> = Quadrivio Corporation
 //
 
@@ -23,6 +23,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <unistd.h>
 #include <vector>
 
 #if defined _WIN32 || defined _WIN64
