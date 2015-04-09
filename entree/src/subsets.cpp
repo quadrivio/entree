@@ -17,6 +17,7 @@
 
 #include "utils.h"
 
+#include <algorithm>
 #include <iomanip>
 #include <iostream>
 #include <set>
@@ -419,7 +420,7 @@ void iterateCombinations(size_t n,
         // choose no items
         vector<size_t> combination;
         
-        if (limit == NO_INDEX || count < limit) {
+        if (limit == NO_INDEX || (index_t)count < limit) {
             nextCombinations.push_back(combination);
             count++;
         }
@@ -431,7 +432,7 @@ void iterateCombinations(size_t n,
             combination.push_back(i);
         }
         
-        if (limit == NO_INDEX || count < limit) {
+        if (limit == NO_INDEX || (index_t)count < limit) {
             nextCombinations.push_back(combination);
             count++;
         }
@@ -440,13 +441,13 @@ void iterateCombinations(size_t n,
         // recursion happens here
         
         // add all combinations of size k that don't contain last index
-        if (limit == NO_INDEX || count < limit) {
+        if (limit == NO_INDEX || (index_t)count < limit) {
             iterateCombinations(n - 1, k, NO_INDEX, nextCombinations, count, limit); 
         }
         
         // add all combinations of size k that do contain last index, by adding all combinations
         // of size k - 1 that don't contain last index, then appending last index to them
-        if (limit == NO_INDEX || count < limit) {
+        if (limit == NO_INDEX || (index_t)count < limit) {
             iterateCombinations(n - 1, k - 1, (index_t)n - 1, nextCombinations, count, limit); 
         }
     }

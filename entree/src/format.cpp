@@ -13,6 +13,7 @@
 //  Utilities for handling values and categories
 //
 
+#include <algorithm>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
@@ -101,7 +102,7 @@ bool CategoryMaps::findCategoryForIndex(index_t index, std::string& category) co
     if (index == NO_INDEX && useNaCategory) {
         found = true;
         
-    } else if (index >= 0 && index < categories.size()) {
+    } else if (index >= 0 && index < (index_t)categories.size()) {
         category = categories[(size_t)index];
         found = true;
     }
@@ -380,6 +381,12 @@ bool SortValueVector::operator ()(size_t i, size_t j)
                 result = i < j;
             }
             break;
+            
+        default:
+            // suppress compiler warning
+            result = false;
+            RUNTIME_ERROR_IF(true, "unrecognized value type");
+            break;
     }
     
     return result;
@@ -438,7 +445,7 @@ void printValuesColumn(const std::vector<Value>& valuesColumn,
     }
     
     size_t numRows = valuesColumn.size();
-    if (maxRows > 0 && numRows > maxRows) {
+    if (maxRows > 0 && numRows > (size_t)maxRows) {
         numRows = (size_t)maxRows;
     }
     
@@ -629,7 +636,7 @@ Value modeValue(const std::vector<Value>& valuesColumn,
                 index_t categoryIndex = valuesColumn[row].number.i;
                 LOGIC_ERROR_IF(categoryIndex < 0, "out of range");
                 
-                if (categoryIndex < categoryCount) {
+                if ((size_t)categoryIndex < categoryCount) {
                     // countsIndex differs from categoryIndex if using NA category
                     size_t countsIndex = (size_t)(categoryIndex - beginCategoryIndex);
                     counts[countsIndex]++;
@@ -637,7 +644,7 @@ Value modeValue(const std::vector<Value>& valuesColumn,
             }
         }
         
-        size_t selectedCount;
+        size_t selectedCount = 0;
         string selectedName;
         
         for (index_t categoryIndex = beginCategoryIndex;
@@ -1098,6 +1105,9 @@ void imputeOptionToString(ImputeOption imputeOption, string& str)
         case kToMode:                   str = "mode";       break;
         case kToMean:                   str = "mean";       break;
         case kToMedian:                 str = "median";     break;
+            
+        // suppress compiler warning
+        default:                        str = "";           break;
     }
 }
 
@@ -1109,6 +1119,12 @@ ImputeOption getDefaultImputeOption(ValueType valueType)
     switch (valueType) {
         case kCategorical:  imputeOption = kToCategory; break;
         case kNumeric:      imputeOption = kToMedian;   break;
+        
+        default:
+            // suppress compiler warning
+            imputeOption = kToMedian;
+            RUNTIME_ERROR_IF(true, "unrecognized value type");
+            break;
     }
     
     return imputeOption;

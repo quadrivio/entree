@@ -17,6 +17,7 @@
 
 #include "format.h"
 
+#include <algorithm>
 #include <cmath>
 #include <iostream>
 #include <set>

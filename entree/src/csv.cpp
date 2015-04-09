@@ -303,7 +303,7 @@ bool uniformRowLengths(const std::vector< std::vector<std::string> >& cells)
 {
     bool result = true;
     
-    size_t numCols;
+    size_t numCols = 0;
     
     for (size_t row = 0; row < cells.size() && result; row++) {
         if (row == 0) {

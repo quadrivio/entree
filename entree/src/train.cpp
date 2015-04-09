@@ -369,7 +369,7 @@ void train(std::vector<CompactTree>& trees,
     RUNTIME_ERROR_IF(columnsPerTree < 1, "no useful columns");
     
     // make sure number is reasonable
-    if (columnsPerTree > numSelectedCols) {
+    if (columnsPerTree > (index_t)numSelectedCols) {
         columnsPerTree = (index_t)numSelectedCols;
     }
 
@@ -716,7 +716,7 @@ void improveSubtree(TreeNode *nodeP,
                     index_t& finalLeafCount,    // updated for each leaf found
                     const vector<Value>& imputedValues)
 {
-    if (depth < maxDepth && (maxNodes <= 0 || gNextIndex < maxNodes)) {
+    if (depth < maxDepth && (maxNodes <= 0 || gNextIndex < (size_t)maxNodes)) {
         bool improved = improveLeaf(nodeP, subsetIndexes, values, valueTypes, categoryMaps,
                                     selectColumns, targetColumn, sortedIndexes, colNames,
                                     minImprovement, minLeafCount, maxSplitsPerNumericAttribute,
@@ -1068,7 +1068,7 @@ ValueAndMeasure getBestNumericalSplit(size_t col,
                 // equal) then proceed down to find best
                 
                 bool first = true;
-                double previousValue;
+                double previousValue = 0.0;
                 
                 // initially, all rows are less than or equal to top row
                 double lessThanOrEqualSum = totalSum;
@@ -1150,7 +1150,7 @@ ValueAndMeasure getBestNumericalSplit(size_t col,
                 // then proceed down to find best
                 
                 bool first = true;
-                double previousValue;
+                double previousValue = 0.0;
 
                 // initially, all rows are less than or equal to top row
                 vector<int> currentTargetCategoryCounts(totalTargetCategoryCounts);
@@ -1346,7 +1346,7 @@ ValueAndMeasure getBestCategoricalSplit(size_t col,
                 // 
                 for (size_t index = 0; index <= numSortedIndexes; index++) {
                     bool evaluateCategory = false;
-                    double currentMeasure;
+                    double currentMeasure = 0.0;
                     
                     if (index == numSortedIndexes) {
                         // just finished last finished category; evaluate it
@@ -1471,7 +1471,7 @@ bool improveImperfectLeaf(TreeNode *nodeP,
         
         if (gVerbose) CERR << endl << colNames.at(col) << endl;
         
-        ValueAndMeasure bestSplit;
+        ValueAndMeasure bestSplit =  { { { 0.0 }, false }, 0.0 };
         bestSplit.value = gNaValue;
         
         switch(valueTypes.at(col)) {
@@ -1809,7 +1809,7 @@ bool improveImperfectLeaf(TreeNode *nodeP,
         for (size_t rowIndex = 0; rowIndex < rowIndexes.size(); rowIndex++) {
             size_t row = rowIndexes[rowIndex];
             
-            bool isLessOrEqual;
+            bool isLessOrEqual = false;
             
             switch(valueTypes.at(col)) {
                 case kCategorical:
@@ -1902,7 +1902,7 @@ bool improveImperfectLeaf(TreeNode *nodeP,
             nodeP->lessOrEqualNode = lessOrEqualNode;
             nodeP->greaterOrNotNode = greaterOrNotNode;
             
-            bool toLessOrEqualIfNA;
+            bool toLessOrEqualIfNA = false;
             Value imputed = imputedValues[col];
             
             switch(valueTypes.at(col)) {

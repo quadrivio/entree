@@ -368,7 +368,7 @@ void writeModel(const string& modelFile,
         ofs << "categories." << col << endl;
         
         size_t numCategories = categoryMaps[col].countNamedCategories();
-        for (index_t index = 0; index < numCategories; index++) {
+        for (index_t index = 0; index < (index_t)numCategories; index++) {
             string str = categoryMaps[col].getCategoryForIndex(index);
             ofs << '"' << str << '"' << endl;
         }

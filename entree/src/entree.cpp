@@ -24,6 +24,7 @@
 
 #include <algorithm>
 #include <cctype>
+#include <cstring>
 #include <vector>
 
 using namespace std;
@@ -251,7 +252,7 @@ SEXP entree_C(SEXP x,
         // default
         imputeOptions.assign(xCols, kToDefault);
         
-    } else if (numImputeOptions != xCols) {
+    } else if ((size_t)numImputeOptions != xCols) {
         error("invalid length of xImputeOptions");
                 
     } else if (Rf_isString(s_xImputeOptions)) {
@@ -589,7 +590,7 @@ SEXP entree_C(SEXP x,
     PROTECT(result_imputeOptions = Rf_allocVector(STRSXP, numImputeOptions));
     resultUnprotectCount++;
     
-    for (size_t k = 0; k < numImputeOptions; k++) {
+    for (size_t k = 0; k < (size_t)numImputeOptions; k++) {
         string str;
         imputeOptionToString(imputeOptions[k], str);
         
@@ -667,7 +668,7 @@ SEXP entree_C(SEXP x,
     PROTECT(result_colNames = Rf_allocVector(STRSXP, numColNames));
     resultUnprotectCount++;
     
-    for (size_t k = 0; k < numColNames; k++) {
+    for (size_t k = 0; k < (size_t)numColNames; k++) {
         SET_STRING_ELT(result_colNames, (int)k, Rf_mkChar(colNames[k].c_str()));
     }
     
@@ -933,7 +934,7 @@ SEXP entree_predict_C(SEXP object, SEXP x)
     // --------------- convert x ---------------
     
     if (gTrace) {
-        for (size_t k = 0; k < xColumnCount + 1; k++) {
+        for (size_t k = 0; k < (size_t)xColumnCount + 1; k++) {
             char c = '?';
             if (valueTypes[k] == kCategorical) {
                 c = 'C';
@@ -1025,7 +1026,7 @@ SEXP entree_predict_C(SEXP object, SEXP x)
             PROTECT(levels = Rf_allocVector(STRSXP, (int)numCategories));
             unprotectCount++;
             
-            for (index_t k = 0; k < numCategories; k++) {
+            for (index_t k = 0; k < (index_t)numCategories; k++) {
                 string category = categoryMaps[targetColumn].getCategoryForIndex(k);
                 
                 SET_STRING_ELT(levels, (int)k, Rf_mkChar(category.c_str()));
@@ -1053,6 +1054,12 @@ SEXP entree_predict_C(SEXP object, SEXP x)
             }
             
         }
+            break;
+            
+        default:
+            // suppress compiler warning
+            result = NULL;
+            RUNTIME_ERROR_IF(true, "unrecognized value type");
             break;
     }
     
@@ -1087,7 +1094,7 @@ void convertRVector(SEXP rVector,
         
         valueType = kCategorical;
         
-        for (int row = 0; row < rowCount; row++) {
+        for (int row = 0; row < (int)rowCount; row++) {
             Value nextValue;
             nextValue.na = STRING_ELT(rVector, row) == NA_STRING;
             
@@ -1116,7 +1123,7 @@ void convertRVector(SEXP rVector,
     } else if (Rf_isInteger(rVector)) {
         if (gTrace) CERR << name << " " << "isInteger" << endl;
         if (constValueType && valueType == kCategorical) {
-            for (int row = 0; row < rowCount; row++) {
+            for (int row = 0; row < (int)rowCount; row++) {
                 Value nextValue;
                 nextValue.na = INTEGER(rVector)[row] == NA_INTEGER;
                 
@@ -1147,7 +1154,7 @@ void convertRVector(SEXP rVector,
         } else {
             valueType = kNumeric;
             
-            for (int row = 0; row < rowCount; row++) {
+            for (int row = 0; row < (int)rowCount; row++) {
                 Value nextValue;
                 nextValue.number.d = INTEGER(rVector)[row];
                 nextValue.na = INTEGER(rVector)[row] == NA_INTEGER;
@@ -1159,7 +1166,7 @@ void convertRVector(SEXP rVector,
     } else if (Rf_isReal(rVector)) {
         if (gTrace) CERR << name << " " << "isReal" << endl;
         if (constValueType && valueType == kCategorical) {
-            for (int row = 0; row < rowCount; row++) {
+            for (int row = 0; row < (int)rowCount; row++) {
                 Value nextValue;
                 nextValue.na = ISNA(REAL(rVector)[row]);
                 
@@ -1190,7 +1197,7 @@ void convertRVector(SEXP rVector,
         } else {
             valueType = kNumeric;
             
-            for (int row = 0; row < rowCount; row++) {
+            for (int row = 0; row < (int)rowCount; row++) {
                 Value nextValue;
                 nextValue.number.d = REAL(rVector)[row];
                 nextValue.na = ISNA(nextValue.number.d);
@@ -1231,7 +1238,7 @@ void convertRVector(SEXP rVector,
         
         valueType = kCategorical;
         
-        for (int row = 0; row < rowCount; row++) {
+        for (int row = 0; row < (int)rowCount; row++) {
             int level = INTEGER(rVector)[row];
 
             Value nextValue;

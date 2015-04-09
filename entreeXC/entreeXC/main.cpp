@@ -43,7 +43,7 @@ void usage();
 
 void version()
 {
-    cerr << "0.10-2" << endl;
+    cerr << "0.10-3" << endl;
 }
 
 int main (int argc, const char * argv[])

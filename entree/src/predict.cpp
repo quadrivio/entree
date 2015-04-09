@@ -271,6 +271,12 @@ void predictOne(const vector< vector<Value> >& values,
                     case kNumeric:
                         useLessOrEqual = compareValue.number.d <= tree.value[nodeIndex].d;
                         break;
+                        
+                    default:
+                        // suppress compiler warning
+                        useLessOrEqual = false;
+                        RUNTIME_ERROR_IF(true, "unrecognized value type");
+                        break;
                 }
             }
             

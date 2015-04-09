@@ -29,20 +29,20 @@ errors will be thrown with `std::logic_error` or `std::runtime_error`.
 
 * R
 
-To create a package usable within R, check and build the R package with the standard
+To create a package usable within R, build and check the R package with the standard
 command-line tools:
 
 ```
 cd path_to_top_directory
-R CMD check entree
 R CMD build entree
+R CMD check entree_0.10-3.tar.gz
 ```
 
 (If you download and expand the zip file, the top directory is named entree-master.) Then, install the package within R in the usual way:
 
 ```
 setwd("path_to_top_directory")
-install.packages("entree_0.10-2.tar.gz", repos = NULL, type = "source")
+install.packages("entree_0.10-3.tar.gz", repos = NULL, type = "source")
 library('entree')
 ```
 
@@ -76,6 +76,9 @@ To run ad-hoc test code or to experiment with other code in the project, modify 
 develop() function in develop.cpp. Create a New Scheme, and name it "entree develop".
 Choose Edit Scheme, choose the "Run entree" section, select the Arguments tab, and add the
 argument, "--develop".
+
+To compile the R-specific code in XCode, 1) Add to the project the R Framework (which is likely to be at /Library/Frameworks/R.framework);
+2) change the preprocesser macro RPACKAGE to have a value of 1 (instead of 0), by editing Target > Build Settings > Apple LLVM 6.0 - Preprocessing > Preprocessor Macros.
 
 ### Development Environment
 
